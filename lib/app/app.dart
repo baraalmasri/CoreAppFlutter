@@ -1,3 +1,4 @@
+import 'package:coreflutterapp/presentation/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,6 +23,9 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      theme: getApplicationTheme (),
+
+    );
   }
 }
