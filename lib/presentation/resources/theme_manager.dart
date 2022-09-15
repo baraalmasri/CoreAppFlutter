@@ -1,7 +1,7 @@
-import 'package:coreflutterapp/presentation/color_manager.dart';
-import 'package:coreflutterapp/presentation/font_manager.dart';
-import 'package:coreflutterapp/presentation/styles_manager.dart';
-import 'package:coreflutterapp/presentation/values_manager.dart';
+import 'package:coreflutterapp/presentation/resources/color_manager.dart';
+import 'package:coreflutterapp/presentation/resources/font_manager.dart';
+import 'package:coreflutterapp/presentation/resources/styles_manager.dart';
+import 'package:coreflutterapp/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 
 ThemeData getApplicationTheme() {

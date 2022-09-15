@@ -1,4 +1,4 @@
-import 'package:coreflutterapp/presentation/theme_manager.dart';
+import 'package:coreflutterapp/presentation/resources/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 
