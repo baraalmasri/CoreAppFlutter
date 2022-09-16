@@ -2,6 +2,7 @@ import 'package:coreflutterapp/presentation/forgot_password/forgot_password_view
 import 'package:coreflutterapp/presentation/login/login_view.dart';
 import 'package:coreflutterapp/presentation/main/main_view.dart';
 import 'package:coreflutterapp/presentation/register/register_view.dart';
+import 'package:coreflutterapp/presentation/resources/strings_manager.dart';
 import 'package:coreflutterapp/presentation/splash/splash_view.dart';
 import 'package:coreflutterapp/presentation/store_details/store_details_view.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +40,9 @@ class RouteGenerator {
     return MaterialPageRoute(
         builder: (_) => Scaffold(
               appBar: AppBar(
-                title:const Text("No page or Route found "),// todo move this string to strings manager
+                title:const Text(AppStrings.noRouteFound),
               ),
-          body:  const Center(child: Text("No page or Route found ")),// todo move this string to strings manager
+          body:  const Center(child:Text(AppStrings.noRouteFound), ),
             ));
   }
 }
