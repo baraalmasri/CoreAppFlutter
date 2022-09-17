@@ -25,6 +25,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      //removing debug icon
+      debugShowCheckedModeBanner: false,
       //here we saying to the app dude we have route generator who's gonna give you the pages easily
       onGenerateRoute: RouteGenerator.getRoute,
       //here we telling the first page is teh splash view page
