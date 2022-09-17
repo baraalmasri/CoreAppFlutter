@@ -63,6 +63,10 @@ flutter:
   #and the original image must be in the main folder as images
   assets:
     - assets/images/splash_logo.png
+    - assets/images/onboarding_logo_house.svg
+    - assets/images/onboarding_logo_home_set.svg
+    - assets/images/onboarding_logo_elecitronic.svg
+    - assets/images/onboarding_logo_car.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
