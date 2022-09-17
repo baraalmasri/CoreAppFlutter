@@ -49,13 +49,14 @@ ThemeData getApplicationTheme() {
     //-------------------------------------------
     // text theme
     textTheme: TextTheme(
-
-      headline1: getSemiBoldStyle(
+      displayLarge:
+          getLightStyle(color: ColorManager.white, fontSize: FontSize.s22),
+      headlineLarge: getSemiBoldStyle(
           color: ColorManager.darkGrey, fontSize: FontSize.s16),
-      subtitle1:
+      titleMedium:
           getMediumStyle(color: ColorManager.lightGrey, fontSize: FontSize.s14),
-      caption: getRegularStyle(color: ColorManager.grey2),
-      bodyText1: getRegularStyle(color: ColorManager.grey),
+      bodyLarge: getRegularStyle(color: ColorManager.grey2),
+      bodySmall: getRegularStyle(color: ColorManager.grey),
     ),
     //---------------------------------------------------------
     /*input decoration theme is the text field or input field */
