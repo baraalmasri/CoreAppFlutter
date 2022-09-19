@@ -7,4 +7,9 @@ class ImageAssets{
   static const String onboardingCarLogo ="$IMAGE_PATH/onboarding_logo_car.svg";
   static const String onboardingElecitronicLogo ="$IMAGE_PATH/onboarding_logo_elecitronic.svg";
 
+  static const String circleDotLogo ="$IMAGE_PATH/circle-dot.svg";
+  static const String dotCircleLogo ="$IMAGE_PATH/dot-circle.svg";
+  static const String leftArrowLogo ="$IMAGE_PATH/left-arrow.svg";
+  static const String rightArrowLogo  ="$IMAGE_PATH/right-arrow.svg";
+
 }
