@@ -89,10 +89,12 @@ class _OnBoardingViewState extends State<OnBoardingView>
         Padding(
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
+            onTap: ()=> _pageController.animateToPage(_getPreviousIndex(), duration: Duration(milliseconds: 300), curve: Curves.bounceOut),
             child: SizedBox(
               width: AppSize.s20,
               height: AppSize.s20,
               child: SvgPicture.asset(ImageAssets.leftArrowLogo),
+
             ),
           ),
         ),
@@ -107,6 +109,7 @@ class _OnBoardingViewState extends State<OnBoardingView>
         Padding(
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
+            onTap: ()=> _pageController.animateToPage(_getNextIndex(), duration: Duration(milliseconds: 300), curve: Curves.bounceOut),
             child: SizedBox(
               width: AppSize.s20,
               height: AppSize.s20,
@@ -117,7 +120,20 @@ class _OnBoardingViewState extends State<OnBoardingView>
       ],
     );
   }
-
+ int _getPreviousIndex(){
+    int PreviousIndex = -- _currentPageIndex  ;
+    if (PreviousIndex == -1 ){
+      PreviousIndex=_list.length -1;
+    }
+    return PreviousIndex;
+ }
+  int _getNextIndex(){
+    int NextIndex = ++ _currentPageIndex  ;
+    if (NextIndex == _list.length ){
+      NextIndex= 0;
+    }
+    return NextIndex;
+  }
   Widget _getProperCircle(int index) {
     if (index == _currentPageIndex) {
       return SizedBox(width: AppSize.s12 , height: AppSize.s20,child:SvgPicture.asset(ImageAssets.dotCircleLogo));
