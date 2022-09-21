@@ -1,3 +1,4 @@
+import 'package:coreflutterapp/presentation/onboarding/viewmodel/onboarding_viewmodel.dart';
 import 'package:coreflutterapp/presentation/resources/assets_manager.dart';
 import 'package:coreflutterapp/presentation/resources/color_manager.dart';
 import 'package:coreflutterapp/presentation/resources/routes_manager.dart';
@@ -16,29 +17,31 @@ class OnBoardingView extends StatefulWidget {
 
 class _OnBoardingViewState extends State<OnBoardingView>
     with SingleTickerProviderStateMixin {
-  late final List<SliderObject> _list = _getSliderData();
+
   final PageController _pageController = PageController();
-  int _currentPageIndex = 0;
+OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
-  List<SliderObject> _getSliderData() => [
-        SliderObject(AppStrings.onBoardingTitle1,
-            AppStrings.onBoardingSubTitle1, ImageAssets.onboardingCarLogo),
-        SliderObject(AppStrings.onBoardingTitle2,
-            AppStrings.onBoardingSubTitle2, ImageAssets.onboardingHomeSetLogo),
-        SliderObject(
-            AppStrings.onBoardingTitle3,
-            AppStrings.onBoardingSubTitle3,
-            ImageAssets.onboardingElecitronicLogo),
-        SliderObject(AppStrings.onBoardingTitle4,
-            AppStrings.onBoardingSubTitle4, ImageAssets.onboardingHouseLogo),
-      ];
 
+//a private function  to starting the model
+  //the name not important `bind` means baglandir
+ _bind (){
+  _viewModel.start();
+}
+@override
+void initState(){
+   _bind();
+   super.initState();
+
+}
   @override
   Widget build(BuildContext context) {
+    return _getContentWidget();
+  }
+  Widget _getContentWidget(){
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
-                backgroundColor: ColorManager.white,
+        backgroundColor: ColorManager.white,
         elevation: AppSize.s0,
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: ColorManager.talaColor,
@@ -120,26 +123,19 @@ class _OnBoardingViewState extends State<OnBoardingView>
       ],
     );
   }
- int _getPreviousIndex(){
-    int PreviousIndex = -- _currentPageIndex  ;
-    if (PreviousIndex == -1 ){
-      PreviousIndex=_list.length -1;
-    }
-    return PreviousIndex;
- }
-  int _getNextIndex(){
-    int NextIndex = ++ _currentPageIndex  ;
-    if (NextIndex == _list.length ){
-      NextIndex= 0;
-    }
-    return NextIndex;
-  }
+
   Widget _getProperCircle(int index) {
     if (index == _currentPageIndex) {
       return SizedBox(width: AppSize.s12 , height: AppSize.s20,child:SvgPicture.asset(ImageAssets.dotCircleLogo));
     } else {
       return SizedBox(width: AppSize.s12 , height: AppSize.s20,child:SvgPicture.asset(ImageAssets.circleDotLogo));
     }
+  }
+  //closing the model stream data ,for avoiding crashes after showing all data
+  @override
+  void dispose(){
+    _viewModel.dispose();
+    super.dispose();
   }
 }
 
@@ -181,13 +177,4 @@ class OnBoardingPage extends StatelessWidget {
       ),
     );
   }
-}
-
-class SliderObject {
-  String title;
-
-  String subTitle;
-  String image;
-
-  SliderObject(this.title, this.subTitle, this.image);
 }
