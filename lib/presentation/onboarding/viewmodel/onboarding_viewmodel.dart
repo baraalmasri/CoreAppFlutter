@@ -9,7 +9,7 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInputs ,
   late final List<SliderObject> _list ;
   int _currentPageIndex = 0;
 
-  StreamController _streamController = StreamController<SliderViewOpject>();
+  StreamController _streamController = StreamController<SliderViewObject>();
   @override
   void dispose() {
    _streamController.close();
@@ -22,7 +22,7 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInputs ,
     _postDataToView();
   }
   @override
-  int goNext(){
+  int goPrevious(){
     int PreviousIndex = -- _currentPageIndex  ;
     if (PreviousIndex == -1 ){
       PreviousIndex=_list.length -1;
@@ -30,7 +30,7 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInputs ,
     return PreviousIndex;
   }
   @override
-  int goPrevious(){
+  int goNext(){
     int NextIndex = ++ _currentPageIndex  ;
     if (NextIndex == _list.length ){
       NextIndex= 0;
@@ -54,7 +54,7 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInputs ,
   // the output pipe line for sliderView in Onboarding view
   //stream.map here is the function for changing the data or make any effects to the data
   // in the pipe line while data throwing in it
-  Stream<SliderViewOpject> get outputSliderViewObject => _streamController.stream
+  Stream<SliderViewObject> get outputSliderViewObject => _streamController.stream
       .map((SliderViewOpject) => SliderViewOpject);
 
   //onBoarding private functions --------------------------------------------------
@@ -73,7 +73,7 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInputs ,
 
   //-----------adding the data to the sink "pool"
 void _postDataToView(){
-  inputSliderViewObject.add(SliderViewOpject(_currentPageIndex, _list.length, _list[_currentPageIndex]));
+  inputSliderViewObject.add(SliderViewObject(_currentPageIndex, _list.length, _list[_currentPageIndex]));
 }
 
 //-----------------------------------------------------------------------------------
@@ -90,6 +90,6 @@ Sink get inputSliderViewObject;
 abstract class OnBoardingViewModelOutput{
 
   // stream controller output
-  Stream <SliderViewOpject> get outputSliderViewObject;
+  Stream <SliderViewObject> get outputSliderViewObject;
 }
 

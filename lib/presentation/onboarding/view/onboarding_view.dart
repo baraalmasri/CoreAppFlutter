@@ -1,3 +1,4 @@
+import 'package:coreflutterapp/domain/models.dart';
 import 'package:coreflutterapp/presentation/onboarding/viewmodel/onboarding_viewmodel.dart';
 import 'package:coreflutterapp/presentation/resources/assets_manager.dart';
 import 'package:coreflutterapp/presentation/resources/color_manager.dart';
@@ -35,56 +36,71 @@ void initState(){
 }
   @override
   Widget build(BuildContext context) {
-    return _getContentWidget();
-  }
-  Widget _getContentWidget(){
-    return Scaffold(
-      backgroundColor: ColorManager.white,
-      appBar: AppBar(
-        backgroundColor: ColorManager.white,
-        elevation: AppSize.s0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ColorManager.talaColor,
-            statusBarBrightness: Brightness.light),
-      ),
-      body: PageView.builder(
-          controller: _pageController,
-          itemCount: _list.length,
-          onPageChanged: (index) {
-            setState(() {
-              _currentPageIndex = index;
-            });
-          },
-          itemBuilder: (context, index) {
-            return OnBoardingPage(_list[index]);
-          }),
-      bottomSheet: Container(
-        color: ColorManager.white,
-
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
-                },
-                child: Text(
-                  AppStrings.skip,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.end,
-                ),
-              ),
-            ),
-            _getBottomSheetWidget()
-          ],
-        ),
-      ),
+   //connecting the stream model  with the view page
+    return StreamBuilder<SliderViewObject>(
+      stream: _viewModel.outputSliderViewObject,
+      builder: (context,snapshot){
+        return _getContentWidget(snapshot.data);
+      },
     );
   }
 
-  Widget _getBottomSheetWidget() {
+
+
+  Widget _getContentWidget(SliderViewObject? sliderViewObject){
+   if (sliderViewObject ==null){
+     return Container ();
+   }
+   else {
+     return Scaffold(
+       backgroundColor: ColorManager.white,
+       appBar: AppBar(
+         backgroundColor: ColorManager.white,
+         elevation: AppSize.s0,
+         systemOverlayStyle: SystemUiOverlayStyle(
+             statusBarColor: ColorManager.talaColor,
+             statusBarBrightness: Brightness.light),
+       ),
+       body: PageView.builder(
+           controller: _pageController,
+           itemCount: sliderViewObject.nunmberOfSlides,
+           onPageChanged: (index) {
+       _viewModel.onPageCHanged(index);
+           },
+           itemBuilder: (context, index) {
+             return OnBoardingPage(sliderViewObject.sliderObject);
+           }),
+       bottomSheet: Container(
+         color: ColorManager.white,
+
+         child: Column(
+           mainAxisSize: MainAxisSize.min,
+           children: [
+             Align(
+               alignment: Alignment.centerRight,
+               child: TextButton(
+                 onPressed: () {
+                   Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                 },
+                 child: Text(
+                   AppStrings.skip,
+                   style: Theme
+                       .of(context)
+                       .textTheme
+                       .bodySmall,
+                   textAlign: TextAlign.end,
+                 ),
+               ),
+             ),
+             _getBottomSheetWidget(sliderViewObject)
+           ],
+         ),
+       ),
+     );
+   }
+  }
+
+  Widget _getBottomSheetWidget(SliderViewObject sliderViewObject) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -92,7 +108,7 @@ void initState(){
         Padding(
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
-            onTap: ()=> _pageController.animateToPage(_getPreviousIndex(), duration: Duration(milliseconds: 300), curve: Curves.bounceOut),
+            onTap: ()=> _pageController.animateToPage(_viewModel.goPrevious(), duration: Duration(milliseconds: 300), curve: Curves.bounceOut),
             child: SizedBox(
               width: AppSize.s20,
               height: AppSize.s20,
@@ -103,16 +119,16 @@ void initState(){
         ),
 
         Row(children: [
-          for (int i =0;i<_list.length;i++)
+          for (int i =0;i<sliderViewObject.nunmberOfSlides;i++)
             Padding(padding: const EdgeInsets.all(AppPadding.p14),
-            child: _getProperCircle(i),)
+            child: _getProperCircle(i,sliderViewObject.currentIndex),)
         ],),
 
         //right  arrow as svg and gesture detector
         Padding(
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
-            onTap: ()=> _pageController.animateToPage(_getNextIndex(), duration: Duration(milliseconds: 300), curve: Curves.bounceOut),
+            onTap: ()=> _pageController.animateToPage(_viewModel.goNext(), duration: Duration(milliseconds: 300), curve: Curves.bounceOut),
             child: SizedBox(
               width: AppSize.s20,
               height: AppSize.s20,
@@ -124,8 +140,8 @@ void initState(){
     );
   }
 
-  Widget _getProperCircle(int index) {
-    if (index == _currentPageIndex) {
+  Widget _getProperCircle(int index ,currentPageIndex) {
+    if (index == currentPageIndex) {
       return SizedBox(width: AppSize.s12 , height: AppSize.s20,child:SvgPicture.asset(ImageAssets.dotCircleLogo));
     } else {
       return SizedBox(width: AppSize.s12 , height: AppSize.s20,child:SvgPicture.asset(ImageAssets.circleDotLogo));

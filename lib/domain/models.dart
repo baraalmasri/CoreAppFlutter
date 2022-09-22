@@ -7,11 +7,11 @@ class SliderObject {
   SliderObject(this.title, this.subTitle, this.image);
 }
 
-class SliderViewOpject {
+class SliderViewObject {
   SliderObject sliderObject;
   int nunmberOfSlides;
   int currentIndex;
 
-  SliderViewOpject(this.currentIndex, this.nunmberOfSlides, this.sliderObject);
+  SliderViewObject(this.currentIndex, this.nunmberOfSlides, this.sliderObject);
 }
 //---------------------------------------------------------------------------
