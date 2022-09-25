@@ -1,7 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+part 'responses.g.dart';
 
 //part 'responses.g.dart';
-
+// this command for generating json code like "ToJson ,FromJson" from classes
+//flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 @JsonSerializable()
 class BaseResponse {
   @JsonKey(name: "status")
@@ -40,7 +42,7 @@ class ContactsResponse {
 
   ContactsResponse(this.phone, this.email, this.link);
 
-  // from json
+  //from json
   factory ContactsResponse.fromJson(Map<String, dynamic> json) =>
       _$ContactsResponseFromJson(json);
 
@@ -57,7 +59,7 @@ class AuthenticationResponse extends BaseResponse {
 
   AuthenticationResponse(this.customer, this.contacts);
 
-  // from json
+  //from json
   factory AuthenticationResponse.fromJson(Map<String, dynamic> json) =>
       _$AuthenticationResponseFromJson(json);
 
