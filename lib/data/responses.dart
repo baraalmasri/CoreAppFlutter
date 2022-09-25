@@ -3,6 +3,7 @@ part 'responses.g.dart';
 
 //part 'responses.g.dart';
 // this command for generating json code like "ToJson ,FromJson" from classes
+// we need to add part file to be generated as the name of file + .g. will added as example : test.dart, part test.g.dart
 //flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 @JsonSerializable()
 class BaseResponse {
