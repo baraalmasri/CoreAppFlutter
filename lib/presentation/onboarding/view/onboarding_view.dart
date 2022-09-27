@@ -1,4 +1,4 @@
-import 'package:coreflutterapp/domain/models.dart';
+import 'package:coreflutterapp/domain/model/models.dart';
 import 'package:coreflutterapp/presentation/onboarding/viewmodel/onboarding_viewmodel.dart';
 import 'package:coreflutterapp/presentation/resources/assets_manager.dart';
 import 'package:coreflutterapp/presentation/resources/color_manager.dart';

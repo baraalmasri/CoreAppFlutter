@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:coreflutterapp/domain/models.dart';
+import 'package:coreflutterapp/domain/model/models.dart';
 import 'package:coreflutterapp/presentation/base/baseviewmodel.dart';
 import 'package:coreflutterapp/presentation/resources/assets_manager.dart';
 import 'package:coreflutterapp/presentation/resources/strings_manager.dart';
