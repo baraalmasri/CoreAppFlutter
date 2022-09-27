@@ -25,17 +25,17 @@ class Customer {
   Customer(this.id, this.name, this.numOfNotifications);
 }
 
-class Contects {
+class Contacts {
   String phone;
   String email;
   String link;
 
-  Contects(this.phone, this.email, this.link);
+  Contacts(this.phone, this.email, this.link);
 }
 
 class Authentication {
-  Customer customer;
-  Contects contects;
+  Customer? customer;
+  Contacts? contects;
 
   Authentication(this.customer, this.contects);
 }
