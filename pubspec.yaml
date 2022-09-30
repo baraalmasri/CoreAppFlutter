@@ -41,6 +41,7 @@ dependencies:
   json_serializable: ^6.1.4
   #this dartz for responses if not saccess we need `either` to avoid wrong or error data's response
   dartz: ^0.10.1
+  internet_connection_checker: ^0.0.1+4
 
 dev_dependencies:
   flutter_test:

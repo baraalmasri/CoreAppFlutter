@@ -6,8 +6,8 @@ import 'package:retrofit/retrofit.dart';
 part 'app_api.g.dart';
 
 @RestApi(baseUrl: Constants.baseUrl)
-abstract class AppServiceClinet {
-  factory AppServiceClinet(Dio dio, {String baseUrl}) = _AppServiceClinet;
+abstract class AppServiceClient {
+  factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClinet;
 
   @POST("/customers/login")
   Future<AuthenticationResponse> login(
