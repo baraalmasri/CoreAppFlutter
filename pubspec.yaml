@@ -42,6 +42,11 @@ dependencies:
   #this dartz for responses if not saccess we need `either` to avoid wrong or error data's response
   dartz: ^0.10.1
   internet_connection_checker: ^0.0.1+4
+  #in the video it's ^1.1.1
+  pretty_dio_logger: ^1.2.0-beta-1
+  #shared_preferences:  for language files ..etc
+  shared_preferences: ^2.0.15
+
 
 dev_dependencies:
   flutter_test:
