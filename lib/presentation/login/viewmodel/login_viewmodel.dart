@@ -1,14 +1,26 @@
 import 'dart:async';
 
 import 'package:coreflutterapp/presentation/base/baseviewmodel.dart';
+import 'package:coreflutterapp/presentation/common/freezed_data_classes.dart';
+
+import '../../../data/network/requests.dart';
+import '../../../domain/usecase/login_usecase.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
   //pipeline for string type for user name , also .broadcast means ability to multi page or variables to listen or see username controller value
   final StreamController _UserNameStreamController =
-      StreamController<String>.broadcast();
+  StreamController<String>.broadcast();
   final StreamController _UserPasswordStreamController =
-      StreamController<String>.broadcast();
+  StreamController<String>.broadcast();
+
+  //this variable will hold the last entered data all time ,using the freezed library power of course
+  var loginObjectData = LoginObjectData("", "");
+
+  //usecase using
+  final LoginUseCase _loginUseCase;
+
+  LoginViewModel(this._loginUseCase);
 
   // inputs ------------------------------------------------
   @override
@@ -27,29 +39,42 @@ class LoginViewModel extends BaseViewModel
   Sink get inputUserPassword => _UserPasswordStreamController.sink;
 
   @override
-  login() {
-    // TODO: implement login
-    throw UnimplementedError();
+  login() async {
+    //we'll use fold function , it's look like Either func, that returns left right  ,left failure , right access
+    (await _loginUseCase.execute(
+        LoginUseCaseInput(loginObjectData.password, loginObjectData.userName)))
+        .fold((failure) => {
+          //l , left ,failure here
+          print(failure.message)
+    }, (data) => {
+          //r, right ,success here
+          print(data.customer?.name)
+    });
   }
 
   @override
   setPassword(String password) {
     inputUserPassword.add(password);
+    //copy with : this method work because we had imported `freezed` library to the loginobjectdata class
+    loginObjectData.copyWith(password: password);
   }
 
   @override
   setUserName(String userName) {
     inputUserName.add(userName);
+    loginObjectData.copyWith(userName: userName);
   }
 
   // outputs ------------------------------------------------
   @override
-  Stream<bool> get outIsPasswordValid => _UserPasswordStreamController.stream
-      .map((password) => _isPasswordValid(password));
+  Stream<bool> get outIsPasswordValid =>
+      _UserPasswordStreamController.stream
+          .map((password) => _isPasswordValid(password));
 
   @override
-  Stream<bool> get outIsUserNameValid => _UserNameStreamController.stream
-      .map((username) => _isUsernameValid(username));
+  Stream<bool> get outIsUserNameValid =>
+      _UserNameStreamController.stream
+          .map((username) => _isUsernameValid(username));
 
   bool _isPasswordValid(String password) {
     return password.isNotEmpty;
