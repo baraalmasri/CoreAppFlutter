@@ -1,5 +1,5 @@
 import 'package:coreflutterapp/presentation/forgot_password/forgot_password_view.dart';
-import 'package:coreflutterapp/presentation/login/login_view.dart';
+import 'package:coreflutterapp/presentation/login/view/login_view.dart';
 import 'package:coreflutterapp/presentation/main/main_view.dart';
 import 'package:coreflutterapp/presentation/onboarding/view/onboarding_view.dart';
 import 'package:coreflutterapp/presentation/register/register_view.dart';

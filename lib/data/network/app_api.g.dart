@@ -8,8 +8,8 @@ part of 'app_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _AppServiceClinet implements AppServiceClient {
-  _AppServiceClinet(
+class _AppServiceClient implements AppServiceClient {
+  _AppServiceClient(
     this._dio, {
     this.baseUrl,
   }) {
